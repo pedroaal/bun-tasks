@@ -6,7 +6,7 @@ const handleError = (err: Error | HTTPResponseError, ctx: Context) => {
   if (err instanceof HTTPException) {
     return ctx.json(
       {
-        message: err.message,
+        error: err.message,
       },
       err.status,
     )
@@ -14,7 +14,7 @@ const handleError = (err: Error | HTTPResponseError, ctx: Context) => {
 
   return ctx.json(
     {
-      message: "Something went wrong!",
+      error: "Something went wrong!",
     },
     500,
   )

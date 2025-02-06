@@ -1,7 +1,7 @@
 import { Hono } from "hono"
+import { zValidator } from "@hono/zod-validator"
 
-import TaskDao from "../services/tasks.dao"
-import { validate } from "../validate.middleware"
+import TaskDao from "../services/task.dao"
 import {
   CreateTaskSchema,
   UpdateTaskSchema,
@@ -15,8 +15,8 @@ TaskRouter.get("/", async (ctx) => {
   return ctx.json(tasks)
 })
 
-TaskRouter.post("/", validate(CreateTaskSchema), async (ctx) => {
-  const body = await ctx.req.json()
+TaskRouter.post("/", zValidator("json", CreateTaskSchema), async (ctx) => {
+  const body = ctx.req.valid("json")
   const task = await repo.create(body)
   return ctx.json(task)
 })
@@ -28,9 +28,9 @@ TaskRouter.get("/:id", async (ctx) => {
   return ctx.json(task)
 })
 
-TaskRouter.patch("/:id", validate(UpdateTaskSchema), async (ctx) => {
+TaskRouter.patch("/:id", zValidator("json", UpdateTaskSchema), async (ctx) => {
   const id = ctx.req.param("id")
-  const body = await ctx.req.json()
+  const body = ctx.req.valid("json")
   const task = await repo.update(+id, body)
   return ctx.json(task)
 })

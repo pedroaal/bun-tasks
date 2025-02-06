@@ -29,7 +29,7 @@ class BaseDao<ITable extends PgTable, ISelect, IInsert> {
     return newRecord
   }
 
-  async findById(id: number | string): Promise<ISelect | undefined> {
+  async findById(id: number | string): Promise<ISelect> {
     const [record] = await db
       .select()
       .from(this.table)
