@@ -10,6 +10,7 @@ export const TaskStatus = pgEnum("tasks_status", ["CREATED", "COMPLETED"])
 
 export const TasksTable = pgTable("tasks", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  userId: integer().notNull(),
   title: varchar({ length: 255 }).notNull(),
   description: varchar({ length: 255 }).notNull(),
   status: TaskStatus().default("CREATED"),
