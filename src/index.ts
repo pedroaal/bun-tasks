@@ -1,5 +1,5 @@
-import { Hono } from "hono"
 import { serve } from "bun"
+import { Hono } from "hono"
 import { jwt, type JwtVariables } from "hono/jwt"
 
 import handleError from "./utils/error"
@@ -30,8 +30,6 @@ app.use(
 
 app.route("/api", TaskRouter)
 app.route("/api", UserRouter)
-
-// app.get("/ui", swaggerUI({ url: "/doc" }))
 
 app.onError(handleError)
 
