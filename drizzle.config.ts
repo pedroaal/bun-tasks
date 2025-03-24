@@ -1,6 +1,6 @@
-import { defineConfig } from "drizzle-kit"
+import { defineConfig } from "drizzle-kit";
 
-const DATABASE_URL = process.env.DATABASE_URL || ""
+const DATABASE_URL = process.env.DATABASE_URL || "";
 
 export default defineConfig({
   out: "./drizzle",
@@ -10,4 +10,6 @@ export default defineConfig({
   dbCredentials: {
     url: DATABASE_URL,
   },
-})
+});
+
+// https://orm.drizzle.team/docs/get-started/bun-sqlite-new
