@@ -11,32 +11,22 @@ const TaskRouter = new Hono().basePath("/task")
 const repo = new TaskDao()
 
 TaskRouter.get("/", async (ctx) => {
-  const tasks = await repo.findAll()
-  return ctx.json(tasks)
+  return ctx.json({})
 })
 
 TaskRouter.post("/", zValidator("json", CreateTaskSchema), async (ctx) => {
-  const body = ctx.req.valid("json")
-  const task = await repo.create({ ...body })
-  return ctx.json(task)
+  return ctx.json({})
 })
 
 TaskRouter.get("/:id", async (ctx) => {
-  const id = ctx.req.param("id")
-  const task = await repo.findById(+id)
-  return ctx.json(task)
+  return ctx.json({})
 })
 
 TaskRouter.patch("/:id", zValidator("json", UpdateTaskSchema), async (ctx) => {
-  const id = ctx.req.param("id")
-  const body = ctx.req.valid("json")
-  const task = await repo.update(+id, body)
-  return ctx.json(task)
+  return ctx.json({})
 })
 
 TaskRouter.delete("/:id", async (ctx) => {
-  const id = ctx.req.param("id")
-  await repo.delete(+id)
   return
 })
 
