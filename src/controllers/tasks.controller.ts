@@ -13,6 +13,10 @@ const repo = new TaskDao()
 // https://hono.dev/docs/api/routing
 // https://github.com/honojs/middleware/tree/main/packages/zod-validator
 
+// sacar los datos de la peticion
+// usar repo para hacer las peticiones
+// retornar un json con el resultado
+
 TaskRouter.get("/", async (ctx) => {
   return ctx.json({})
 })

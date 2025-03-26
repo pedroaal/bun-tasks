@@ -2,6 +2,8 @@ import { object, type z } from "zod"
 
 // https://zod.dev/?id=strings
 
+// crear las validaciones de los datos
+
 export const CreateTaskSchema = object({})
 
 export const UpdateTaskSchema = object({})
