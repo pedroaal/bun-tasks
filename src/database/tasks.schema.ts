@@ -1,22 +1,15 @@
-import {
-  integer,
-  pgEnum,
-  pgTable,
-  timestamp,
-  varchar,
-} from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm"
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
 
-export const TaskStatus = pgEnum("tasks_status", ["CREATED", "COMPLETED"]);
+export const TasksTable = sqliteTable("tasks", {
+  id: integer({ mode: "number" }).primaryKey({ autoIncrement: true }),
+  title: text().notNull(),
+  description: text().notNull(),
+  status: text({ enum: ["CREATED", "COMPLETED"] }).notNull(),
+  createdAt: text("timestamp").notNull().default(sql`(current_timestamp)`),
+  updatedAt: text("timestamp").notNull().default(sql`(current_timestamp)`),
+  deletedAt: text("timestamp"),
+})
 
-export const TasksTable = pgTable("tasks", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  title: varchar({ length: 255 }).notNull(),
-  description: varchar({ length: 255 }).notNull(),
-  status: TaskStatus().default("CREATED"),
-  createdAt: timestamp().defaultNow().notNull(),
-  updatedAt: timestamp().defaultNow().notNull(),
-  deletedAt: timestamp(),
-});
-
-export type ITaskSelect = typeof TasksTable.$inferSelect;
-export type ITaskInsert = typeof TasksTable.$inferInsert;
+export type ITaskSelect = typeof TasksTable.$inferSelect
+export type ITaskInsert = typeof TasksTable.$inferInsert
