@@ -1,0 +1,30 @@
+POST http://localhost:3000/api/task HTTP/1.1
+content-type: application/json
+
+{
+  "title": "test",
+  "description": "Test"
+}
+
+###
+
+GET http://localhost:3000/api/task HTTP/1.1
+
+###
+
+GET http://localhost:3000/api/task/1 HTTP/1.1
+
+###
+
+PATCH http://localhost:3000/api/task/1 HTTP/1.1
+content-type: application/json
+
+{
+  "title": "Test update",
+  "description": "Test update",
+  "status": "COMPLETED"
+}
+
+###
+
+DELETE http://localhost:3000/api/task/1 HTTP/1.1
