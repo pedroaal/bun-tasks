@@ -36,7 +36,6 @@ TaskRouter.patch("/:id", zValidator("json", UpdateTaskSchema), async (ctx) => {
 
 TaskRouter.delete("/:id", async (ctx) => {
   const id = ctx.req.param("id")
-  const task = await repo.findById(+id)
   await repo.delete(+id)
   return
 })
