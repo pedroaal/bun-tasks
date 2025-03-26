@@ -1,13 +1,9 @@
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core"
+import { sqliteTable } from "drizzle-orm/sqlite-core"
 
-export const TasksTable = sqliteTable("tasks", {
-  id: integer({ mode: "number" }).primaryKey({ autoIncrement: true }),
-  title: text().notNull(),
-  description: text().notNull(),
-  status: text({ enum: ["CREATED", "COMPLETED"] })
-    .notNull()
-    .default("CREATED"),
-})
+// https://orm.drizzle.team/docs/column-types/sqlite
+// id, title, description, status: "CREATED" | "COMPLETED"
+
+export const TasksTable = sqliteTable("tasks", {})
 
 export type ITaskSelect = typeof TasksTable.$inferSelect
 export type ITaskInsert = typeof TasksTable.$inferInsert

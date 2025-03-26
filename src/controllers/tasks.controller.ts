@@ -10,6 +10,9 @@ import {
 const TaskRouter = new Hono().basePath("/task")
 const repo = new TaskDao()
 
+// https://hono.dev/docs/api/routing
+// https://github.com/honojs/middleware/tree/main/packages/zod-validator
+
 TaskRouter.get("/", async (ctx) => {
   return ctx.json({})
 })
@@ -27,7 +30,7 @@ TaskRouter.patch("/:id", zValidator("json", UpdateTaskSchema), async (ctx) => {
 })
 
 TaskRouter.delete("/:id", async (ctx) => {
-  return
+  return ctx.json({})
 })
 
 export default TaskRouter

@@ -23,12 +23,22 @@ describe("TaskRouter", () => {
       },
       {},
     )
+
     expect(res.status).toBe(200)
+
+    const json = await res.json()
+    expect(json).toBe({ ...data, id: 1, status: "CREATED" })
   })
 
   it("should return all tasks", async () => {
     const res = await testClient(TaskRouter)["task"].$get()
+
     expect(res.status).toBe(200)
+
+    const json = await res.json()
+    expect(json).toBe([
+      { id: 1, title: "Test", description: "Test", status: "CREATED" },
+    ])
   })
 
   it("should return a tasks", async () => {
@@ -37,7 +47,16 @@ describe("TaskRouter", () => {
         id: 1,
       },
     })
+
     expect(res.status).toBe(200)
+
+    const json = await res.json()
+    expect(json).toBe({
+      id: 1,
+      title: "Test",
+      description: "Test",
+      status: "CREATED",
+    })
   })
 
   it("should return updated task", async () => {
@@ -55,16 +74,23 @@ describe("TaskRouter", () => {
       },
       {},
     )
+
     expect(res.status).toBe(200)
+
+    const json = await res.json()
+    expect(json).toBe({ ...data, id: 1 })
   })
 
-  it("should return deleted task", async () => {
+  it.only("should return deleted task", async () => {
     const res = await testClient(TaskRouter)["task"][":id"].$delete({
       param: {
         id: 1,
       },
     })
-    console.log(res)
+
     expect(res.status).toBe(200)
+
+    const json = await res.json()
+    expect(json).toBe({ count: 1 })
   })
 })

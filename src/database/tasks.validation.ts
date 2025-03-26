@@ -1,5 +1,7 @@
 import { object, type z } from "zod"
 
+// https://zod.dev/?id=strings
+
 export const CreateTaskSchema = object({})
 
 export const UpdateTaskSchema = object({})
