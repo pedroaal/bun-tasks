@@ -12,38 +12,59 @@ mock.module("../config/db.ts", () => {
 })
 
 describe("TaskRouter", () => {
-  it.only("should return created task", async () => {
+  it("should return created task", async () => {
     const data = {
       title: "Test",
       description: "Test",
     }
-    const res = await testClient(TaskRouter).task.$post(
+    const res = await testClient(TaskRouter)["task"].$post(
       {
         json: data,
       },
       {},
     )
-    console.log(res)
     expect(res.status).toBe(200)
   })
 
   it("should return all tasks", async () => {
-    const res = await testClient(TaskRouter).task.$get()
+    const res = await testClient(TaskRouter)["task"].$get()
     expect(res.status).toBe(200)
   })
 
   it("should return a tasks", async () => {
-    const res = await testClient(TaskRouter).task.$get()
+    const res = await testClient(TaskRouter)["task"][":id"].$get({
+      param: {
+        id: 1,
+      },
+    })
     expect(res.status).toBe(200)
   })
 
   it("should return updated task", async () => {
-    const res = await testClient(TaskRouter).task.$patch()
+    const data = {
+      title: "Test updated",
+      description: "Test updated",
+      status: "COMPLETED",
+    }
+    const res = await testClient(TaskRouter)["task"][":id"].$patch(
+      {
+        json: data,
+        param: {
+          id: 1,
+        },
+      },
+      {},
+    )
     expect(res.status).toBe(200)
   })
 
   it("should return deleted task", async () => {
-    const res = await testClient(TaskRouter).task.$delete()
+    const res = await testClient(TaskRouter)["task"][":id"].$delete({
+      param: {
+        id: 1,
+      },
+    })
+    console.log(res)
     expect(res.status).toBe(200)
   })
 })
