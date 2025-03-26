@@ -1,6 +1,4 @@
-import { defineConfig } from "drizzle-kit";
-
-const DATABASE_URL = process.env.DATABASE_URL || "";
+import { defineConfig } from "drizzle-kit"
 
 export default defineConfig({
   out: "./drizzle",
@@ -8,6 +6,6 @@ export default defineConfig({
   casing: "snake_case",
   dialect: "sqlite",
   dbCredentials: {
-    url: DATABASE_URL,
+    url: "tasks.db",
   },
-});
+})
